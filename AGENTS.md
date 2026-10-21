@@ -270,6 +270,12 @@ Shared reference files in `.agents/references/`:
 | `components.md`  | Full MDX component catalog with props and usage examples    |
 | `procedures.md`  | Rules for writing step-by-step procedural instructions      |
 
+## Cursor Cloud specific instructions
+
+- Node.js 24 and pnpm 11 are required. `devEngines` rejects older Node versions. This environment installs Node 24 with nvm and activates `pnpm@11.28.7` (CI installs pnpm with `version: 11`). Login shells prepend `~/.nvm/versions/node/v24.*/bin` so `node` and `pnpm` resolve to those binaries.
+- The docs app listens on port 1111 (`astro.config.ts`). Boot runs `pnpm dev --host 0.0.0.0 --port 1111`. The `predev` hook downloads Cloudflare Skills from middlecache and continues if that fetch fails.
+- Validate with `pnpm run check`, `pnpm run lint`, `pnpm run format:core:check`, and `pnpm run test:prebuild`. `pnpm run build` sets an 8 GB Node heap and is the slow production build.
+
 ## Commit conventions
 
 - Format: `[Product] description` or `type: description`
